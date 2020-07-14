@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hive-metastore-info
+  labels:
+    # import from https://github.com/open-datastudio/hive-metastore/blob/master/k8s-hive.yaml.
+    # see to know more about export/import https://docs.staroid.com/project/dependency.html
+    dependency.staroid.com/import: hive-metastore-info
+data:
+  HIVE_METASTORE_NAMESPACE: default
+  HIVE_METASTORE_SERVICE: hive-metastore-service

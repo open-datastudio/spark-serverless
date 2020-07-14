@@ -1,0 +1,11 @@
+apiVersion: beta/v1
+starRank:
+  rate: 1.2
+build:
+  skaffold:
+    file: skaffold.yaml
+deploy:
+  dependencies:
+    - project: open-datastudio/hive-metastore
+      level: OPTIONAL
+  implements: open-datastudio/spark-serverless

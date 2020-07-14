@@ -1,0 +1,12 @@
+apiVersion: skaffold/v2beta1
+kind: Config
+deploy:
+  kubectl:
+    manifests:
+      - k8s/hive-metastore.yaml
+profiles:
+  - name: minikube
+    patches:
+      - op: add
+        path: /deploy/kubectl/manifests/0
+        value: ./k8s/minikube.yaml
