@@ -5,7 +5,7 @@ bin=$(cd "${bin}">/dev/null; pwd)
 
 source $bin/ske_common.sh
 
-DEFAULT_IMAGE="opendatastudio/spark:v3.1.0-snapshot-20200618-01"
+DEFAULT_IMAGE="opendatastudio/spark-py:v3.0.0-staroid"
 SPARK_IMAGE=${SPARK_IMAGE:-$DEFAULT_IMAGE}
 
 ns=`$STARCTL namespace \
@@ -16,4 +16,5 @@ NAMESPACE=`echo -e "$ns" | tail -1 | sed "s/$SKE_NS_ALIAS[ ]*//g" | awk '{print 
 
 cat $bin/../template/spark-defaults.conf | \
 sed "s/NAMESPACE/$NAMESPACE/g" | \
-sed "s|SPARK_IMAGE|$SPARK_IMAGE|g"
+sed "s|SPARK_IMAGE|$SPARK_IMAGE|g" | \
+sed "s|INSTANCE_NAME|$INSTANCE_NAME|g"

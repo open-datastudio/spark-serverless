@@ -10,4 +10,4 @@ spec:
     - name: blockmanager
       port: 22322
   selector:
-    app: driver-INSTANCE_NAME
+    resource.staroid.com/system: shell

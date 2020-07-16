@@ -31,7 +31,7 @@ $STARCTL tunnel \
   -org "${SKE_ORG}" \
   -cluster "${SKE_CLUSTER}" \
   -ns-alias "${SKE_NS_ALIAS}" \
-  -kube-proxy R:22321:localhost:22321 R:22322:localhost:22322 2> /dev/null &
+  -kube-proxy R:22321:0.0.0.0:22321 R:22322:0.0.0.0:22322 2> /dev/null &
 if [ $? -ne 0 ]; then
   echo "Creating tunnel failed"
   exit 1
