@@ -34,7 +34,7 @@ fi
 echo "🔑 Create secure tunnel"
 mkdir -p $TMP_DIR
 
-$STARCTL tunnel \
+nohup $STARCTL tunnel \
   -org "${SKE_ORG}" \
   -cluster "${SKE_CLUSTER}" \
   -ns-alias "${SKE_NS_ALIAS}" \
