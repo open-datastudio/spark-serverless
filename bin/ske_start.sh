@@ -38,7 +38,7 @@ nohup $STARCTL tunnel \
   -org "${SKE_ORG}" \
   -cluster "${SKE_CLUSTER}" \
   -ns-alias "${SKE_NS_ALIAS}" \
-  -kube-proxy R:22321:0.0.0.0:22321 R:22322:0.0.0.0:22322 2> /dev/null &
+  -kube-proxy R:22321:0.0.0.0:22321 R:22322:0.0.0.0:22322 R:4040:0.0.0.0:4040 2> /dev/null &
 echo $! > "$TMP_DIR/tunnel-$INSTANCE_NAME.pid"
 if [ $? -ne 0 ]; then
   echo "❌ Creating tunnel failed"

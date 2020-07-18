@@ -11,3 +11,16 @@ spec:
       port: 22322
   selector:
     resource.staroid.com/system: shell
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: spark-ui-INSTANCE_NAME
+  annotations:
+    service.staroid.com/link: "show"
+spec:
+  ports:
+    - name: spark-ui
+      port: 4040
+  selector:
+    resource.staroid.com/system: shell
