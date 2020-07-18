@@ -3,12 +3,22 @@
 Spark server provides Apache Spark 3.0 (and future version) in serverless configuration.
 
  - Easy to use
+    - No infra, Spark cluster management
+ - Run anywhere
+    - From your notebook, python project, laptop, etc
  - Open source
- - Optimized Spark configuration for Kubernetes
- - Secure tunneling between driver and executors/Kubernetes API server over HTTPS. So Spark client mode application can run anywhere.
+    - You can get involved and improve the code
+    - You can use personally and commercially
+ - Secure
+    - Secure communication channel between spark driver and executors on remote server.
 
 
-## How to use (staroid)
+## Quick start
+
+- [Spark serverless on Google Colab](https://colab.research.google.com/github/open-datastudio/spark-serverless/blob/master/notebooks/Spark_serverless_on_Colab.ipynb)
+
+
+## 
 
 Currently, it supports [staroid](https://staroid.com) cloud platform. Contribution for other cloud platform support is welcome!
 
@@ -108,7 +118,22 @@ Currently, it supports [staroid](https://staroid.com) cloud platform. Contributi
 
   6. Use it!
 
-     You can 
+     You can create a Spark session with configurations for the executors.
+     Below is an example that creates maximum 10 dynamically allocated executors on 4 CPU, 16GB mem spot instance.
+
+     ```
+     spark = SparkSession.builder \
+       .config("spark.executor.cores", "4") \
+       .config("spark.executor.memory", "16g") \
+       .config("spark.kubernetes.executor.label.pod.staroid.com/instance-type", "standard-4") \
+       .config("spark.kubernetes.executor.label.pod.staroid.com/spot", "true") \
+       .config("spark.dynamicAllocation.initialExecutors", "1") \
+       .config("spark.dynamicAllocation.minExecutors", "1") \
+       .config("spark.dynamicAllocation.maxExecutors", "10") \
+       .getOrCreate()
+     ```
+
+     See [here](https://docs.staroid.com/ske/pod.html#pod) to know more about controlling Pod on staroid, using labels.
 
 ## How it works
 
@@ -117,41 +142,18 @@ Currently, it supports [staroid](https://staroid.com) cloud platform. Contributi
 Therefore, this project more focuses on providing Kubernetes API endpoint to the Spark application, 
 with optimized Spark configuration for the Kubernetes and each cloud platform providers.
 
+### Spark client mode application
 
-```
+![](http://open-datastudio.io/_images/spark-serverless-client-mode.png)
 
-+---------------------+                             +------------------+
-| +-----------------+ |                             |                  |
-| | Optimized Spark | |                             |                  |
-| | Configuration   | |                             |    Kubernetes    |
-| +-----------------+ |                             |                  |
-|          |          |                             |                  |
-| Your application    | ----- <Secure Tunnel> ----- |    - driver      |
-|  - spark-shell      |                             |    - executors   |
-|  - spark-submit     |                             |                  |
-|  - etc              |                             |                  |
-|                     |                             |                  |
-+---------------------+                             +------------------+
+### Spark cluster mode application
 
-```
-
-
-
-### Spark client mode
-
-In client mode, Spark driver can run on the client side. For example
-
- - Run spark-shell from laptop
- - Create Spark context in Notebook and interact with it (example)
-
-Client mode require driver run in client side while executors are running in Kubernetes cluster.
-
-Spark serverless provides a secure tunnel between Spark driver and executors, driver and Kubernetes API server to enable it.
+![](http://open-datastudio.io/_images/spark-serverless-cluster-mode.png)
 
 
 ## Cloud platform support
 
-Currently, spark-serverless project runs executors on [staroid](https://staroid.com), the cloud platform for open-source projects. So you'll need an staroid account to try it. (You can get $50 free credits on signup)
+Currently, spark-serverless project runs executors on [staroid](https://staroid.com), the cloud platform for open-source projects. So you'll need an staroid account to try it.
 
 Contribution for other cloud platform support is welcome!
 
