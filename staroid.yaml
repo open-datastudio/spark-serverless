@@ -1,6 +1,6 @@
 apiVersion: beta/v1
 starRank:
-  rate: 1.2
+  rate: 1.1
 build:
   skaffold:
     file: skaffold.yaml
