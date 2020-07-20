@@ -15,10 +15,10 @@ Spark server provides Apache Spark 3.0 (and future version) in serverless config
 
 ## Quick start
 
-- [Spark serverless on Google Colab](https://colab.research.google.com/github/open-datastudio/spark-serverless/blob/master/notebooks/Spark_serverless_on_Colab.ipynb)
+- Spark serverless on Google Colab [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/open-datastudio/spark-serverless/blob/master/notebooks/Spark_serverless_on_Colab.ipynb)
 
 
-## 
+## Usage
 
 Currently, it supports [staroid](https://staroid.com) cloud platform. Contribution for other cloud platform support is welcome!
 
@@ -130,6 +130,8 @@ Currently, it supports [staroid](https://staroid.com) cloud platform. Contributi
        .config("spark.dynamicAllocation.initialExecutors", "1") \
        .config("spark.dynamicAllocation.minExecutors", "1") \
        .config("spark.dynamicAllocation.maxExecutors", "10") \
+       .config("spark.driver.host", "driver-spark-serverless") \
+       .config("spark.driver.bindAddress", "0.0.0.0") \
        .getOrCreate()
      ```
 
@@ -161,3 +163,7 @@ Contribution for other cloud platform support is welcome!
 ## Contribution
 
 spark-serverless is an open-source project, as part of [Open data studio](https://open-datastudio.io/) project. Please feel free to create [issues](https://github.com/open-datastudio/spark-serverless/issues) and [pull requests](https://github.com/open-datastudio/spark-serverless/pulls) on this repository.
+
+## Get supported
+
+Don't hesitate to create an [issue](https://github.com/open-datastudio/spark-serverless/issues) and [join our Slack channel](https://join.slack.com/t/opendatastudio/shared_invite/zt-fy2dsmb7-E9_UrBAh4UA47lzN5sUHUA).
